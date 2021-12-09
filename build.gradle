@@ -1,0 +1,77 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:19.0.0'
+
+
+    // Spring Boot Starter
+    testImplementation ('org.springframework.boot:spring-boot-starter-test')
+
+    // Lombok
+    implementation ('org.projectlombok:lombok')
+    compileOnly ('org.projectlombok:lombok:1.18.20')
+    annotationProcessor ('org.projectlombok:lombok:1.18.20')
+
+    // DB
+    runtimeOnly ('mysql:mysql-connector-java') //mysql8
+    //runtimeOnly 'mysql:mysql-connector-java:5.1.47' //mysql5
+    implementation ('org.springframework.boot:spring-boot-starter-jdbc')
+  //  compile('org.springframework.boot:spring-boot-starter-data-jpa') //mysql 5버전의 경우 삭제.
+
+
+
+    // Web
+    implementation ('org.springframework.boot:spring-boot-starter-web')
+
+    // Security, Authentication
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation(group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0')
+    implementation('io.jsonwebtoken:jjwt:0.9.0')
+
+    implementation('org.springframework.boot:spring-boot-starter')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+
+    implementation 'com.google.firebase:firebase-admin:6.8.1'
+
+    //jwt
+    implementation 'javax.xml.bind:jaxb-api:2.1'
+
+//    //firebase
+//    implementation 'com.google.firebase:forebase-admin:6.8.1'
+ //    implementation group: 'com.sqareup.okhttp3' , name: 'okhttp' , version: '4.2.2'
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+
+    // define any required OkHttp artifacts without version
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
+
+
+}
+
+test {
+    useJUnitPlatform()
+}

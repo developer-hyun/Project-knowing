@@ -3,6 +3,7 @@ package com.example.demo.src.user;
 
 
 import com.example.demo.config.BaseException;
+import com.example.demo.config.BaseResponseStatus;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
@@ -116,7 +117,21 @@ public class UserService {
         }
     }
 
+    /**
+     * 유저정보수정(추가정보)
 
+     */
+    public GetUserModifyRes patchUserPlusInfo(String userUid,PatchUserPlusInfo patchUserPlusInfo) throws BaseException{
+        if ((userDao.checkuid(userUid))==0){
+            throw new BaseException(BaseResponseStatus.NO_USERUID);
+        }
+
+        String status= "유저정보수정완료";
+        userDao.patchUserPlusInfo(userUid,patchUserPlusInfo);
+        GetUserModifyRes getUserModifyRes = new GetUserModifyRes(status);
+        return getUserModifyRes;
+
+    }
 
 
 
@@ -140,6 +155,7 @@ public class UserService {
      * 북마크 등록
      */
     public PostBookmarkRes postBookmarkRes(String userUid,String welfareUid) {
+
         String result = "";
         if((userDao.checkbookmark(userUid,welfareUid)) == 1){   //중복이있다 그러면 삭제해야한다!
             userDao.deleteBookmark(userUid,welfareUid);
@@ -156,6 +172,19 @@ public class UserService {
         return postBookmarkRes;
     }
 
+    /**
+     * fcm(아토)추가
+     */
+    public Postfcmplus fcmplus(String userUid,String fcmtoken) throws BaseException{
+        if ((userDao.checkuid(userUid))==0){
+            throw new BaseException(BaseResponseStatus.NO_USERUID);
+        }
+        userDao.plusfcm(userUid,fcmtoken);
+        String status="fcm추가완료";
+        Postfcmplus postfcmplus = new Postfcmplus(status);
+        return postfcmplus;
+
+    }
 
 //    //POST
 //    public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
@@ -193,4 +222,6 @@ public class UserService {
 //            throw new BaseException(DATABASE_ERROR);
 //        }
 //    }
+
+
 }

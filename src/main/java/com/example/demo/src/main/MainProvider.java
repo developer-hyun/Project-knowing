@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -263,8 +264,8 @@ public class MainProvider {
         if(getUserInfoloop.getEmpolyCategory().contains("중소중견기업취업지원")) {
             type2 = "%중소중견기업취업지원%";
         }
-        if(getUserInfoloop.getEmpolyCategory().contains("특수분야취업지원")) {
-            type3 = "%특수분야취업지원%";
+        if(getUserInfoloop.getEmpolyCategory().contains("특수분야취업")) {
+            type3 = "%특수분야취업%";
         }
         if(getUserInfoloop.getEmpolyCategory().contains("해외취업및진출지원")) {
             type4 = "%해외취업및진출지원%";
@@ -645,6 +646,27 @@ public class MainProvider {
         List<GetAlarmList> getAlarmList = mainDao.getAlarmPageRes(userUid);
         GetAlarmPageRes getAlarmPageRes = new GetAlarmPageRes(getAlarmList);
         return getAlarmPageRes;
+    }
+
+    /**
+     * 공지사항
+     */
+    public List<notice> getnotice() throws BaseException{
+       // boolean newStatus = true;
+      //  LocalDate today = LocalDate.now();
+        List<notice> notices = mainDao.getnotice();
+        return notices;
+//
+//        for (int i=0; i <notices.size(); i++)
+//
+//
+//
+//
+//        LocalDate newDay = LocalDate.of()
+//
+
+
+
     }
 
 }

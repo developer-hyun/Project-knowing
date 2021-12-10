@@ -304,7 +304,7 @@ public class UserController {
                 e.printStackTrace();
             }
 
-            //      System.out.println(naverOuathParams);
+        //          System.out.println(naverOuathParams);
 
             String email = naverOuathParams.getResponse().getEmail();
             // System.out.println(email);
@@ -598,6 +598,26 @@ public class UserController {
 
     }
 
+    /**
+     * 유저정보수정(추가정보
+     */
+    @ResponseBody
+    @PostMapping("usermodify/plusinfo")
+    public BaseResponse<GetUserModifyRes> patchUserPlusInfo(@RequestHeader("userUid") String userUid,
+                                                            @RequestBody PatchUserPlusInfoList patchUserPlusInfoList) throws BaseException{
+        try{
+            String specialStatus = String.join(" ",patchUserPlusInfoList.getSpecialStatus());
+            String employmentState = String.join(" ",patchUserPlusInfoList.getEmploymentState());
+            PatchUserPlusInfo patchUserPlusInfo = new PatchUserPlusInfo(patchUserPlusInfoList.getAddress(),patchUserPlusInfoList.getAddressDetail(),specialStatus,patchUserPlusInfoList.getIncomeLevel(),patchUserPlusInfoList.getIncomeAvg(),employmentState,patchUserPlusInfoList.getSchoolRecords(),patchUserPlusInfoList.getSchool(),patchUserPlusInfoList.getMainMajor(),patchUserPlusInfoList.getSubMajor(),patchUserPlusInfoList.getSemester(),patchUserPlusInfoList.getLastSemesterScore());
+            GetUserModifyRes getUserModifyRes = userService.patchUserPlusInfo(userUid,patchUserPlusInfo);
+            return new BaseResponse<>(getUserModifyRes);
+        } catch (BaseException baseException) {
+            return new BaseResponse<>((baseException.getStatus()));
+        }
+    }
+
+
+
     /** 유저정보수정 (개인정보)
      *
      */
@@ -660,6 +680,19 @@ public class UserController {
         PostBookmarkRes postBookmarkRes = userService.postBookmarkRes(userUid,welfareUid);
         return new BaseResponse<>(postBookmarkRes);
     }
+
+    /**
+     * fcm등록(아토)
+     */
+    @ResponseBody
+    @PostMapping("/fcmplus")
+    public BaseResponse<Postfcmplus> fcmplus(@RequestHeader("userUid") String userUid,
+                                             @RequestHeader("fcmtoken") String fcmtoken) throws BaseException{
+
+        Postfcmplus postfcmplus = userService.fcmplus(userUid, fcmtoken);
+        return new BaseResponse<>(postfcmplus);
+    }
+
 }
 
 

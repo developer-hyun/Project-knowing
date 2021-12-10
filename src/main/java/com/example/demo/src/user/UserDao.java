@@ -225,6 +225,14 @@ public class UserDao {
                 new Object[]{patchUserPrivacyReq.getEmail(),patchUserPrivacyReq.getName(),patchUserPrivacyReq.getPwd(),patchUserPrivacyReq.getPhNum(),patchUserPrivacyReq.getGender(),patchUserPrivacyReq.getBirth(),uid});
     }
 
+    /**
+     * 유저정보 수정(추가정보)
+     */
+    public void patchUserPlusInfo(String userUid,PatchUserPlusInfo patchUserPlusInfo){
+        this.jdbcTemplate.update("update User SET address=?,addressDetail=?,specialStatus=?,incomeLevel=?,incomeAvg=?,employmentState=?,schoolRecords=?,school=?,mainMajor=?,subMajor=?,semester=?,lastSemesterScore=? where uid=?",
+                new Object[]{patchUserPlusInfo.getAddress(),patchUserPlusInfo.getAddressDetail(),patchUserPlusInfo.getSpecialStatus(),patchUserPlusInfo.getIncomeLevel(),patchUserPlusInfo.getIncomeAvg(),patchUserPlusInfo.getEmploymentState(),patchUserPlusInfo.getSchoolRecords(),patchUserPlusInfo.getSchool(),patchUserPlusInfo.getMainMajor(),patchUserPlusInfo.getSubMajor(),patchUserPlusInfo.getSemester(),patchUserPlusInfo.getLastSemesterScore(),userUid});
+
+    }
 
     /** 유저탈퇴
      *
@@ -267,6 +275,14 @@ public class UserDao {
     public int checkbookmark(String userUid,String welfareUid) {
         return this.jdbcTemplate.queryForObject("select exists(select bookMarkIdx from bookMark where userUid=? AND welfareUid=?)",
                 int.class,userUid,welfareUid);
+    }
+
+    /**
+     * fcm(아토)추가
+     */
+    public void plusfcm(String userUid,String fcmtoken) {
+        this.jdbcTemplate.update("update User SET FCMTOKEN=? where uid=?",
+                new Object[]{fcmtoken,userUid});
     }
 
 }

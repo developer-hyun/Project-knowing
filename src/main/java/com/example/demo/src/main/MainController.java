@@ -1,9 +1,6 @@
 package com.example.demo.src.main;
 
-import com.example.demo.src.main.model.GetAlarmPageRes;
-import com.example.demo.src.main.model.GetAlarmRes;
-import com.example.demo.src.main.model.GetMainViewRes;
-import com.example.demo.src.main.model.GetStudent;
+import com.example.demo.src.main.model.*;
 import com.example.demo.src.user.UserProvider;
 import com.example.demo.src.user.UserService;
 import com.example.demo.utils.JwtService;
@@ -237,6 +234,17 @@ public class MainController {
         }catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
+    }
+
+    /**
+     * 공지사항
+     */
+    @ResponseBody
+    @GetMapping("/notice")
+    public BaseResponse<List<notice>> getnotice() throws BaseException {
+
+        List<notice> notice = mainProvider.getnotice();
+        return new BaseResponse<>(notice);
     }
 }
 

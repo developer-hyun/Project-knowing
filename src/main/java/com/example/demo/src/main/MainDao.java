@@ -430,6 +430,20 @@ public class MainDao {
                 new Object[]{userUid,alarmUid});
     }
 
+    /**
+     * 공지사항
+     */
+    public List<notice> getnotice() {
+        return this.jdbcTemplate.query("select title,date,content,newStatus from notice where status='ACTIVE'",
+                (rs,rownum) -> new notice(
+                        rs.getString("title"),
+                        rs.getString("date"),
+                        rs.getString("content"),
+                        rs.getBoolean("newStatus")
+                )
+        );
+    }
+
 
 
 

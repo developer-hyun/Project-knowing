@@ -387,7 +387,7 @@ public class MainDao {
      * 알림화면 클릭했을때 뜨는 부분
      */
     public List<GetAlarmList> getAlarmPageRes(String userUid) {
-        return this.jdbcTemplate.query("select alarmUid,title,subTitle,date,postUid, alarmRead from alarmInfo where userUid=?",
+        return this.jdbcTemplate.query("select alarmUid,title,subTitle,date,postUid, alarmRead from alarmInfo where userUid=? order by createdAt DESC",
                 (rs,rownum) -> new GetAlarmList(
                         rs.getString("alarmUid"),
                         rs.getString("title"),

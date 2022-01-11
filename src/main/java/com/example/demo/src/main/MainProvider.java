@@ -262,13 +262,13 @@ public class MainProvider {
             type1 = "%구직활동지원인턴%";
         }
         if(getUserInfoloop.getEmpolyCategory().contains("중소중견기업취업지원")) {
-            type2 = "%중소중견기업취업지원%";
+            type2 = "%중소중견기업취업%";
         }
         if(getUserInfoloop.getEmpolyCategory().contains("특수분야취업")) {
             type3 = "%특수분야취업%";
         }
         if(getUserInfoloop.getEmpolyCategory().contains("해외취업및진출지원")) {
-            type4 = "%해외취업및진출지원%";
+            type4 = "%해외취업및진출%";
         }
 
         //취업지원 받는 부분
@@ -344,10 +344,10 @@ public class MainProvider {
             type1="%기본소득지원%";
         }
         if(getUserInfoloop.getCovidCategory().contains("저소득층지원")) {
-            type2="%저소득층지원%";
+            type2="%저소득층%";
         }
         if(getUserInfoloop.getCovidCategory().contains("재난피해지원")) {
-            type3="%재난피해지원%";
+            type3="%재난피해%";
         }
         if(getUserInfoloop.getCovidCategory().contains("소득일자리보전")) {
             type4="%소득일자리보전%";
@@ -386,9 +386,9 @@ public class MainProvider {
         List<GetStudent> gettotalStudent = mainDao.getMainViewtotalres(type1,type2,type3,type4,type5,type6);
 
         type1 = "%구직활동지원인턴%";
-        type2 = "%중소중견기업취업지원%";
-        type3 = "%특수분야취업지원%";
-        type4 = "%해외취업및진출지원%";
+        type2 = "%중소중견기업취업%";
+        type3 = "%특수분야취업%";
+        type4 = "%해외취업및진출%";
         type5 = "%홅%";
         type6 = "%홅%";
 
@@ -397,13 +397,13 @@ public class MainProvider {
             type1 = "%구직활동지원인턴%";
         }
         if(getUserInfoloop.getEmpolyCategory().contains("중소중견기업취업지원")) {
-            type2 = "%중소중견기업취업지원%";
+            type2 = "%중소중견기업취업%";
         }
         if(getUserInfoloop.getEmpolyCategory().contains("특수분야취업지원")) {
-            type3 = "%특수분야취업지원%";
+            type3 = "%특수분야취업%";
         }
         if(getUserInfoloop.getEmpolyCategory().contains("해외취업및진출지원")) {
-            type4 = "%해외취업및진출지원%";
+            type4 = "%해외취업및진출%";
         }
 
         //취업지원 받는 부분
@@ -468,8 +468,8 @@ public class MainProvider {
 
 
         type1 = "%기본소득지원%";
-        type2 = "%저소득층지원%";
-        type3 = "%재난피해지원%";
+        type2 = "%저소득층%";
+        type3 = "%재난피해%";
         type4 = "%소득일자리보전%";
         type5 = "%기타인센티브%";
         type6 = "%심리지원%";
@@ -478,10 +478,10 @@ public class MainProvider {
             type1="%기본소득지원%";
         }
         if(getUserInfoloop.getCovidCategory().contains("저소득층지원")) {
-            type2="%저소득층지원%";
+            type2="%저소득층%";
         }
         if(getUserInfoloop.getCovidCategory().contains("재난피해지원")) {
-            type3="%재난피해지원%";
+            type3="%재난피해%";
         }
         if(getUserInfoloop.getCovidCategory().contains("소득일자리보전")) {
             type4="%소득일자리보전%";

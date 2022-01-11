@@ -285,4 +285,15 @@ public class UserDao {
                 new Object[]{fcmtoken,userUid});
     }
 
+    /**
+     * check provider
+     */
+    public String checkprovider(String uid) {
+        return this.jdbcTemplate.queryForObject("select provider from User where uid=?",
+                String.class,uid);
+
+    }
+
+
+
 }

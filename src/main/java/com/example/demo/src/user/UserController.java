@@ -142,7 +142,7 @@ public class UserController {
      */
 //    @GetMapping("/kakao-login")
 //    public RedirectView index() {
-//        return new RedirectView("https://kauth.kakao.com/oauth/authorize?client_id=569ca506a1be28891a0fd74dfc47adab&redirect_uri=http://localhost:9000/app/users/kakao&response_type=code");
+//
 //    }
     @ResponseBody
     @GetMapping("/kakao-login")
@@ -152,39 +152,12 @@ public class UserController {
 //            RestTemplate rt = new RestTemplate();
 //
 //            // HttpHeader 오브젝트 생성
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//
-//            // HttpBody 오브젝트 생성
-//            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-//            params.add("grant_type", "authorization_code");
-//            params.add("client_id", "569ca506a1be28891a0fd74dfc47adab");
-//            params.add("redirect_uri", "http://localhost:9000/app/users/kakao");
-//            params.add("code", code);
 //
 //
-//            // HttpHeader와 HttpBody를 하나의 오브젝트에 담기
-//            HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
-//                    new HttpEntity<>(params, headers);
 //
-//            // Http 요청하기 - Post방식으로 - 그리고 response 변수의 응답 받음.
-//            ResponseEntity<String> response = rt.exchange(
 //
-//                    "https://kauth.kakao.com/oauth/token",
-//                    HttpMethod.POST,
-//                    kakaoTokenRequest,
-//                    String.class
-//            );
 //
-//            //    Gson, Json Simple, ObjectMapper
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            OAuthToken oauthToken = null;
-//            try {
-//                oauthToken = objectMapper.readValue(response.getBody(), OAuthToken.class);
-//            } catch (JsonMappingException e) {
-//                e.printStackTrace();
-//            } catch (JsonProcessingException e) {
-//                e.printStackTrace();
+//
 //            }
 //
         //try {
@@ -228,38 +201,7 @@ public class UserController {
             PostKakaoLoginRes postKakaoLoginRes = new PostKakaoLoginRes(status, customToken);
             return new BaseResponse<>(postKakaoLoginRes);
 
-//            int randomnum = kakaoProfile.getId();
-//            String userId = "rlckdrkdud@naver.com";
 //
-//            // String jwt = jwtService.createJwtStr(userId);
-//            String jwt = jwtService.createJwtsocial();
-//            System.out.println(jwt);
-//            PostKakaoLoginRes postKakaoLoginRes = new PostKakaoLoginRes(kakaoProfile.getId(), jwt);
-//            return new BaseResponse<>(postKakaoLoginRes);
-//            } catch (Exception exception) {
-//                return new BaseResponse<>(GET_USERS_KAKAO_ERROR);
-//            }
-
-            //  System.out.println(kakaoProfile);
-            //  System.out.println(kakaoProfile.getId());
-
-//            if (userProvider.checkId(kakaoProfile.getKakao_account().getEmail()) == 0) {
-//
-//                postLogInRes = userService.kakaoCreateUser(kakaoProfile.getKakao_account().getEmail(), kakaoProfile.getProperties().getNickname());
-//
-//            } else {
-//                postLogInRes = userService.kakaologIn(kakaoProfile.getKakao_account().getEmail());
-//            }
-//
-//            return new BaseResponse<>(postLogInRes);
-//        } catch (BaseException exception) {
-//            return new BaseResponse<>(exception.getStatus());
-//        }
-            // System.out.println(kakaoProfile.getKakao_account().getEmail());
-
-//        } catch (BaseException exception) {
-//            return new BaseResponse<>((exception.getStatus()));
-//        }
 
 
         } catch (Exception exception) {
@@ -272,15 +214,12 @@ public class UserController {
     @GetMapping("/naver-login")
     public BaseResponse<PostKakaoLoginRes> naverlogin(@RequestHeader(value = "access-token") String accesstoken) throws Exception {
         try {
-            //  String accesstoken = "AAAAOPY/FcxIo8SYMuey1rLH2ZIeSSK0wVUx3z5Qi6t/tFK2rugJeLeT4n2X69je9xs4IWQCrwsAxDNW40xm0sT+9YY=";
-            //  System.out.println(access_token);
+
             RestTemplate rt = new RestTemplate();
 
             //  HttpHeader 오브젝트 생성
             HttpHeaders profileRequestHeader = new HttpHeaders();
-            // profileRequestHeader.add("Authorization", "Bearer " + accesstoken);
 
-            //  HttpEntity<HttpHeaders> profileHttpEntity = new HttpEntity<>(profileRequestHeader);
             profileRequestHeader.set("Authorization", "Bearer " + accesstoken);
             HttpEntity profileHttpEntity = new HttpEntity(profileRequestHeader);
             //요청
@@ -292,7 +231,6 @@ public class UserController {
             );
 
 
-            // System.out.println(profileResponse.getBody());
 
             ObjectMapper objectMapper = new ObjectMapper();
             NaverOuathParams naverOuathParams = null;
@@ -304,12 +242,10 @@ public class UserController {
                 e.printStackTrace();
             }
 
-        //          System.out.println(naverOuathParams);
+
 
             String email = naverOuathParams.getResponse().getEmail();
-            // System.out.println(email);
-            //   int randomnum = kakaoProfile.getId();
-            //  String kakaonum = Integer.toString(randomnum);
+
             String status = userProvider.kakaologin(email);
             Map<String, Object> additionalClaims = new HashMap<String, Object>();
             additionalClaims.put("id", true);
@@ -627,6 +563,15 @@ public class UserController {
                                                            @RequestBody PatchUserPrivacyReq patchUserPrivacyReq) throws Exception {
 
         try {
+//            UserRecord userRecord = FirebaseAuth.getInstance().getUser(uid);
+//            System.out.println(userRecord);
+          //  System.out.println(userProvider.checkProvider(uid));
+            if (userProvider.checkProvider(uid).equals("default")) {        //default만 파베랑 연동
+                UserRecord.UpdateRequest request = new UserRecord.UpdateRequest(uid)
+                .setEmail(patchUserPrivacyReq.getEmail());
+                UserRecord userRecord = FirebaseAuth.getInstance().updateUser(request);
+                System.out.println("Successfully updated user: " + userRecord.getUid()); }
+
             GetUserModifyRes getUserModifyRes = userService.patchUserPrivacy(uid, patchUserPrivacyReq);
             return new BaseResponse<>(getUserModifyRes);
         } catch (BaseException baseException) {

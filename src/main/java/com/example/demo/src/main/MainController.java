@@ -135,7 +135,7 @@ public class MainController {
     @GetMapping("/testversion")
     public BaseResponse<String> testverson() throws Exception {
         String test = "success";
-        String token = "f0cvi6BsnUSsq94IXL8umu:APA91bHo1iLdLajvvMTzDaCu7Yht9igQc0Voi8ibqdEraP5x6eKGQRCeStVvWmzIDTr6v4W35IbnBFbOhqeL-uk8wazb2tJP66QxxsYwkOhgMbZa14halhZUfLsgn3y5MAj3E6Lt_YUY";
+        String token = "eflR1ohyRPutLNFosIm1MS:APA91bEeFLyWdrmgUIKjJ8nXyqyN_qhqLrf1ZV1NfvMCwfnXkJzm6pie_92umSFIMyH5QNik2F9wvLaWHIEbwZ9Neanvx2Gn4RdJY9TfTk6VTVxIWcQjZxyZvC0G2XhA__T0flAcylfa";
 
 
         mainService.tett(token);

@@ -7,6 +7,7 @@
 🤟 **내가 받을 수 있는 최대 금액까지!**
 
 #### 노잉은 나만을 위한 복지정보 알리미입니다!
+#### AOS,IOS 출시 완료!
 
 <br>
 
@@ -31,5 +32,12 @@
  + **북마크 기능(관심 복지 추가 가능)**
  + **검색 기능(모든 복지 정보 제공)**
  + **복지 정책 한눈에 보기(선택한 복지에 대한 정보를 한눈에 제공)**
+
+
+ # Knowing AOS, IOS 출시 링크
+ #### AOS: https://play.google.com/store/apps/details?id=com.teamteam.knowing
+ #### IOS: https://apps.apple.com/kr/app/knowing/id1598340589
  
+ # 그 밖의 Knowing에 대한 자세한 정보들!!!
+ #### Notion: https://makeus-challenge.notion.site/4473469de03140469cf75f833f557290
 
